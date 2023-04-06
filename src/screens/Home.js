@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 export default function Home() {
   return (
     <div className="App">
-      <p>Home</p>
+      <p>Home TEST</p>
       <Link to={"/items"}>
         <p>Go to Items</p>
       </Link>
