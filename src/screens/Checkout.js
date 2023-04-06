@@ -1,12 +1,29 @@
-import React from "react";
-import { Link, useNavigate } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 
 import { ApiCall } from "../services/ApiCall";
 import API from "../services/ApiLists";
+import { getCartData } from "../services/Cart";
 
 import CheckoutItem from "../components/CheckoutItem";
 
 export default function Checkout() {
+  const [products, setProducts] = useState([]);
+  useEffect(() => {
+    fetchItems();
+    // let test = await getCartData();
+    // console.log("getCartData", test);
+    return () => {
+      // console.log("Do home some cleanup");
+    };
+  }, []);
+
+  async function fetchItems() {
+    const items = await getCartData();
+    console.log("products items", items);
+    setProducts(items);
+  }
+  console.log("products productsproducts", products);
   return (
     <div className="App">
       <h2>Checkout</h2>
@@ -18,10 +35,10 @@ export default function Checkout() {
               <div className="d-flex justify-content-between align-items-center mb-4">
                 <h3 className="fw-normal mb-0 text-black">Shopping Cart</h3>
               </div>
-
-              <CheckoutItem />
-
-              <CheckoutItem />
+              {products.length > 0 &&
+                products?.map((item, index) => {
+                  return <CheckoutItem item={item} index={index} />;
+                })}
 
               <div className="card">
                 <div className="card-body">

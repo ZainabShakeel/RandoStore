@@ -13,6 +13,7 @@ export default function Navbar({ productsItem }) {
       // console.log("Do home some cleanup");
     };
   }, []);
+
   async function fetchItems() {
     const items = await getCartData();
     setProducts(items);

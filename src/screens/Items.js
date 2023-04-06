@@ -13,7 +13,7 @@ export default function Items() {
 
   useEffect(() => {
     fetchItems();
-    // let test = await getCartData();
+
     // console.log("getCartData", test);
     return () => {
       // console.log("Do home some cleanup");
@@ -22,8 +22,8 @@ export default function Items() {
 
   async function AddtoCart(item) {
     console.log("item", item, "Cartproducts", Cartproducts);
-    let test = await Cartproducts.push(item);
-    storeCartData(test);
+    let test = Cartproducts.push(item);
+    storeCartData(Cartproducts);
   }
 
   async function fetchItems() {
