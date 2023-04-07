@@ -35,7 +35,7 @@ export default function Checkout() {
               <div className="d-flex justify-content-between align-items-center mb-4">
                 <h3 className="fw-normal mb-0 text-black">Shopping Cart</h3>
               </div>
-              {products.length > 0 &&
+              {products?.length > 0 &&
                 products?.map((item, index) => {
                   return <CheckoutItem item={item} index={index} />;
                 })}

@@ -10,16 +10,22 @@ import { storeCartData, removeCartData, getCartData } from "../services/Cart";
 export default function Items() {
   const [products, setProducts] = useState();
   const [Cartproducts, setCartProducts] = useState([]);
+  const [isCartproducts, setCIsartProducts] = useState(false);
 
   useEffect(() => {
     fetchItems();
-
-    // console.log("getCartData", test);
+    fetchCartProduct();
     return () => {
       // console.log("Do home some cleanup");
     };
   }, []);
 
+  async function fetchCartProduct(item) {
+    const items = await getCartData();
+    console.log("products items", items);
+    setCartProducts(items);
+    setCIsartProducts(!isCartproducts);
+  }
   async function AddtoCart(item) {
     console.log("item", item, "Cartproducts", Cartproducts);
     let test = Cartproducts.push(item);
@@ -38,7 +44,7 @@ export default function Items() {
   }
   return (
     <div className="App">
-      <Navbar productsItem={Cartproducts} />
+      <Navbar productsItem={Cartproducts} isCartproducts={isCartproducts} />
       <div className="container mt-100">
         <div className="row">
           {products?.map((item, index) => {

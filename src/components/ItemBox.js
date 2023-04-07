@@ -1,4 +1,5 @@
 import React from "react";
+import API from "../services/ApiLists";
 
 export default function ItemBox({ item, index, AddtoCart }) {
   return (
@@ -7,7 +8,7 @@ export default function ItemBox({ item, index, AddtoCart }) {
         <a className="card-img-tiles" href="#" data-abc="true">
           <div className="inner">
             <div className="main-img">
-              <img src={require(`${item.img}`)} alt="Category" />
+              <img src={API.baseurl + item.img} alt="Category" />
             </div>
           </div>
         </a>

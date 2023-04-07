@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { getCartData } from "../services/Cart";
 import { Link } from "react-router-dom";
 
-export default function Navbar({ productsItem }) {
+export default function Navbar({ productsItem, isCartproducts }) {
   const [products, setProducts] = useState();
 
   useEffect(() => {
@@ -12,13 +12,14 @@ export default function Navbar({ productsItem }) {
     return () => {
       // console.log("Do home some cleanup");
     };
-  }, []);
+  }, [isCartproducts]);
 
   async function fetchItems() {
     const items = await getCartData();
     setProducts(items);
     console.log("navbar", items);
   }
+
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <div className="container-fluid">
@@ -53,7 +54,7 @@ export default function Navbar({ productsItem }) {
             >
               <i className="fas fa-shopping-cart"></i>
               <span className="badge rounded-pill badge-notification bg-warning">
-                {productsItem ? productsItem.length : products.length}
+                {productsItem ? productsItem?.length : products?.length}
               </span>
             </Link>
             {/* <ul className="dropdown-menu dropdown-menu-end block">

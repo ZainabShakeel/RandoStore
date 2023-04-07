@@ -1,14 +1,15 @@
 import React from "react";
+import API from "../services/ApiLists";
 
 export default function CheckoutItem({ item, index }) {
-  console.log("CheckoutItem", item.img);
+  // console.log("CheckoutItem", item.img);
   return (
     <div className="card rounded-3 mb-4" key={index}>
       <div className="card-body p-4">
         <div className="row d-flex justify-content-between align-items-center">
           <div className="col-md-2 col-lg-2 col-xl-2">
             <img
-              src={require(`${item.img}`)}
+              src={API.baseurl + item.img}
               // src={require("./img/bed.jpg")}
               className="img-fluid rounded-3"
               alt="Cotton T-shirt"
