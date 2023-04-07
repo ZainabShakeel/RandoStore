@@ -17,7 +17,6 @@ export default function Navbar({ productsItem, isCartproducts }) {
   async function fetchItems() {
     const items = await getCartData();
     setProducts(items);
-    console.log("navbar", items);
   }
 
   return (
@@ -36,9 +35,10 @@ export default function Navbar({ productsItem, isCartproducts }) {
         </button>
 
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
-          <a className="navbar-brand mt-2 mt-lg-0" href="#">
-            RandoStore
-          </a>
+          <a className="navbar-brand mt-2 mt-lg-0">RandoStore</a>
+          <Link to={"/add-items"} className="text-muted">
+            Add Items
+          </Link>
         </div>
         {/* <!-- Collapsible wrapper --> */}
 
@@ -57,23 +57,6 @@ export default function Navbar({ productsItem, isCartproducts }) {
                 {productsItem ? productsItem?.length : products?.length}
               </span>
             </Link>
-            {/* <ul className="dropdown-menu dropdown-menu-end block">
-              <li>
-                <a className="dropdown-item" href="#">
-                  Some news
-                </a>
-              </li>
-              <li>
-                <a className="dropdown-item" href="#">
-                  Another news
-                </a>
-              </li>
-              <li>
-                <a className="dropdown-item" href="#">
-                  Something else here
-                </a>
-              </li>
-            </ul> */}
           </div>
         </div>
       </div>

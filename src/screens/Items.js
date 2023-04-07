@@ -6,8 +6,11 @@ import API from "../services/ApiLists";
 import Navbar from "../components/Navbar";
 import ItemBox from "../components/ItemBox";
 import { storeCartData, removeCartData, getCartData } from "../services/Cart";
+import { useNavigate } from "react-router-dom";
 
 export default function Items() {
+  const navigate = useNavigate();
+
   const [products, setProducts] = useState();
   const [Cartproducts, setCartProducts] = useState([]);
   const [isCartproducts, setCIsartProducts] = useState(false);
@@ -20,7 +23,7 @@ export default function Items() {
     };
   }, []);
 
-  async function fetchCartProduct(item) {
+  async function fetchCartProduct() {
     const items = await getCartData();
     console.log("products items", items);
     setCartProducts(items);
@@ -54,7 +57,14 @@ export default function Items() {
       });
   }
 
-  function EditItem() {}
+  function EditItem(items) {
+    navigate("/add-items", {
+      state: {
+        items,
+        edit: true,
+      },
+    });
+  }
   return (
     <div className="App">
       <Navbar productsItem={Cartproducts} isCartproducts={isCartproducts} />

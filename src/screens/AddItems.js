@@ -2,30 +2,54 @@ import React, { useEffect, useState } from "react";
 
 import { ApiCall } from "../services/ApiCall";
 import API from "../services/ApiLists";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 // var file = require("file-system");
 // var fs = require("fs");
 
-export default function AddItems() {
+export default function AddItems(props) {
   const navigate = useNavigate();
-  const [name, setName] = useState();
-  const [price, setPrice] = useState();
-  const [image, setImage] = useState();
+  const location = useLocation();
+  // console.log("props", location);
+  const [name, setName] = useState(
+    location?.state?.edit ? location?.state?.items.name : ""
+  );
+  const [price, setPrice] = useState(
+    location?.state?.edit ? location?.state?.items.price : ""
+  );
+  const [image, setImage] = useState(
+    location?.state?.edit ? location?.state?.items.img : ""
+  );
 
   async function AddItemApi() {
     var formData = {
       name,
       price,
-      img: "./img/" + image,
+      img: image,
     };
-    console.log("formData", formData);
+
     ApiCall("Post", API.items, formData)
       .catch((error) => {
         console.log("erorr reponse", error);
       })
       .then((resp) => {
-        console.log("cteated", resp);
+        // console.log("cteated", resp);
         navigate("/items");
+      });
+  }
+
+  function EditItem() {
+    var formData = {
+      name,
+      price,
+      img: image,
+    };
+    ApiCall("Put", API.items + "/" + location?.state?.items.id, formData)
+      .catch((error) => {
+        console.log("erorr reponse", error);
+      })
+      .then((resp) => {
+        navigate("/items");
+        console.log("response EditItem", resp);
       });
   }
 
@@ -69,7 +93,7 @@ export default function AddItems() {
           <p>Product Image</p>
           <input
             className="form-control"
-            placeholder="Image name"
+            placeholder="Path of iamge"
             value={image}
             onChange={(e) => setImage(e.target.value)}
             required
@@ -87,7 +111,9 @@ export default function AddItems() {
         <button
           type="submit"
           className="btn btn-warning mt-3"
-          onClick={() => AddItemApi()}
+          onClick={() => {
+            location?.state?.edit ? EditItem() : AddItemApi();
+          }}
         >
           Submit
         </button>
