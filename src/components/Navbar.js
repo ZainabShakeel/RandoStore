@@ -54,7 +54,7 @@ export default function Navbar({ productsItem, isCartproducts }) {
             >
               <i className="fas fa-shopping-cart"></i>
               <span className="badge rounded-pill badge-notification bg-warning">
-                {productsItem ? productsItem?.length : products?.length}
+                {products?.length}
               </span>
             </Link>
           </div>

@@ -21,6 +21,7 @@ export default function Items() {
   useEffect(() => {
     fetchItems();
     fetchCartProduct();
+
     return () => {
       // console.log("Do home some cleanup");
     };
@@ -28,14 +29,16 @@ export default function Items() {
 
   async function fetchCartProduct() {
     const items = await getCartData();
-    console.log("products items", items);
-    setCartProducts(items);
-    setCIsartProducts(!isCartproducts);
+    console.log("products cart test items", items);
+    if (items.length > 0) setCartProducts(items);
+    else setCartProducts([]);
   }
+
   async function AddtoCart(item) {
     console.log("item", item, "Cartproducts", Cartproducts);
     let test = Cartproducts.push(item);
     storeCartData(Cartproducts);
+    setCIsartProducts(!isCartproducts);
   }
 
   function fetchItems() {
