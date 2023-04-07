@@ -6,6 +6,8 @@ import ItemBox from "../components/ItemBox";
 import { storeCartData, removeCartData, getCartData } from "../services/Cart";
 import { useNavigate } from "react-router-dom";
 
+import "../styles/item.css";
+
 export default function Items() {
   const navigate = useNavigate();
 
