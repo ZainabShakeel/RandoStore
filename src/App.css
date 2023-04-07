@@ -5,6 +5,9 @@
 p {
   text-align: left;
 }
+.text-muted {
+  text-align: center;
+}
 .App-logo {
   height: 40vmin;
   pointer-events: none;
