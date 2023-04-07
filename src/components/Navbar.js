@@ -36,8 +36,11 @@ export default function Navbar({ productsItem, isCartproducts }) {
 
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <a className="navbar-brand mt-2 mt-lg-0">RandoStore</a>
-          <Link to={"/add-items"} className="text-muted">
-            Add Items
+          <Link to={"/add-items"} className="text-muted ">
+            Add Items {"  "}
+          </Link>
+          <Link to={"/items"} className="text-muted mx-5">
+            Items
           </Link>
         </div>
         {/* <!-- Collapsible wrapper --> */}

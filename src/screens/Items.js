@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
-
 import { ApiCall } from "../services/ApiCall";
 import API from "../services/ApiLists";
 import Navbar from "../components/Navbar";
