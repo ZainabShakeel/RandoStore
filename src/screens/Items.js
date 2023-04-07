@@ -32,7 +32,7 @@ export default function Items() {
     storeCartData(Cartproducts);
   }
 
-  async function fetchItems() {
+  function fetchItems() {
     ApiCall("Get", API.items)
       .catch((error) => {
         console.log("erorr reponse", error);
@@ -42,13 +42,34 @@ export default function Items() {
         setProducts(resp.data);
       });
   }
+
+  function DeleteItem(item) {
+    ApiCall("Delete", API.items + "/" + item.id)
+      .catch((error) => {
+        console.log("erorr reponse", error);
+      })
+      .then((resp) => {
+        console.log("response DeleteItem", resp);
+        fetchItems();
+      });
+  }
+
+  function EditItem() {}
   return (
     <div className="App">
       <Navbar productsItem={Cartproducts} isCartproducts={isCartproducts} />
       <div className="container mt-100">
         <div className="row">
           {products?.map((item, index) => {
-            return <ItemBox item={item} index={index} AddtoCart={AddtoCart} />;
+            return (
+              <ItemBox
+                item={item}
+                index={index}
+                AddtoCart={AddtoCart}
+                Delete={DeleteItem}
+                Edit={EditItem}
+              />
+            );
           })}
         </div>
       </div>
