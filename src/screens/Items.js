@@ -15,6 +15,9 @@ export default function Items() {
   const [Cartproducts, setCartProducts] = useState([]);
   const [isCartproducts, setCIsartProducts] = useState(false);
 
+  const [search, setSearch] = useState("");
+  const [searchArray, setSearchArray] = useState("");
+
   useEffect(() => {
     fetchItems();
     fetchCartProduct();
@@ -43,6 +46,7 @@ export default function Items() {
       .then((resp) => {
         // console.log("response Items", resp);
         setProducts(resp.data);
+        setSearchArray(resp.data);
       });
   }
 
@@ -65,10 +69,32 @@ export default function Items() {
       },
     });
   }
+
+  const SearchFilter = (text) => {
+    setSearch(text);
+    if (searchArray?.length > 0) {
+      const newData = searchArray?.filter((item) => {
+        const itemData = `${item.name.toUpperCase()}`;
+        const textData = text.toUpperCase();
+        return itemData.indexOf(textData) > -1;
+      });
+      setProducts(newData);
+    }
+  };
+
   return (
     <div className="App">
       <Navbar productsItem={Cartproducts} isCartproducts={isCartproducts} />
       <div className="container mt-100">
+        <div className="form-group m-5">
+          <input
+            className="form-control"
+            placeholder="Enter Product Name to Search"
+            value={search}
+            onChange={(e) => SearchFilter(e.target.value)}
+            required
+          />
+        </div>
         <div className="row">
           {products?.map((item, index) => {
             return (
